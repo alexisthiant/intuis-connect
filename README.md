@@ -1,5 +1,7 @@
 # Intuis Connect – Intégration Home Assistant (non officielle)
 
+🇫🇷 Français | [🇬🇧 English](README.en.md)
+
 > **Pilotage des radiateurs électriques Intuis / Muller Intuitiv (Legrand)** directement depuis Home Assistant, sans passer par HomeKit — thermostats par pièce, pilotage global de l'installation, gestion de la fenêtre ouverte en écriture, et suivi de consommation.
 
 [![HACS Custom](https://img.shields.io/badge/HACS-Custom-orange.svg)](https://github.com/hacs/integration)
@@ -25,6 +27,10 @@
 ## Installation
 
 > Nécessite Home Assistant récent (2024.1+) ; HACS optionnel mais recommandé.
+
+### Installation en un clic
+
+[![Ouvre ton instance Home Assistant et ajoute ce dépôt dans HACS.](https://my.home-assistant.io/badges/hacs_repository.svg)](https://my.home-assistant.io/redirect/hacs_repository/?owner=alexisthiant&repository=intuis-connect&category=integration)
 
 ### Via HACS (dépôt personnalisé)
 
