@@ -147,7 +147,7 @@ class IntuisRoomClimate(CoordinatorEntity[IntuisDataUpdateCoordinator], ClimateE
         temperature = kwargs.get(ATTR_TEMPERATURE)
         if temperature is None:
             return
-        duration_hours = self.coordinator.default_duration / 3600
+        duration_hours = self.coordinator.get_room_duration_hours(self._room_id)
         await self._async_apply_manual_setpoint(float(temperature), duration_hours)
 
     async def async_set_manual_temperature(self, temperature: float, duration_hours: float) -> None:

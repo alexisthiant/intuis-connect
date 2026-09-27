@@ -62,6 +62,7 @@
 | Type | Entity | Description |
 | --- | --- | --- |
 | **Climate** | `climate.<room>` | Full thermostat (measured temperature, setpoint, Auto/Manual, Frost preset) |
+| **Number** | `number.<room>_duree_de_consigne_manuelle` | Duration (1-12h) automatically applied when you adjust temperature from the regular thermostat |
 | **Switch** | `switch.<room>_open_window` | Open-window state, controllable (read **and** write) |
 | **Sensor** ⚠️ | `sensor.<room>_daily_energy` | Today's consumption in kWh (unofficial endpoint) |
 
@@ -96,7 +97,7 @@
 
 ### `intuis.set_manual_temperature`
 
-Applies a manual setpoint **with a duration you choose, from 1h to 12h**, instead of the Intuis Connect app's default duration. This directly covers the "I want to set the temperature AND its duration" need for each radiator.
+Applies a manual setpoint **with a duration you choose, from 1h to 12h**, for a one-off adjustment, without changing the room's usual setting.
 
 ```yaml
 service: intuis.set_manual_temperature
@@ -108,6 +109,10 @@ data:
 ```
 
 Once the duration expires, the radiator automatically switches back to scheduled mode (Auto), exactly like the mobile app does when a manual override expires.
+
+### Managing duration day-to-day: `number.<room>_duree_de_consigne_manuelle`
+
+So you don't have to call that service every time, each room also has a **Manual setpoint duration** slider (1-12h, visible on the dashboard like any other setting). Once set, this duration is used automatically every time you change the temperature from the regular thermostat (the card's dial, or the `climate.set_temperature` service) — the service above stays available for a different one-off duration, without touching this setting.
 
 ---
 

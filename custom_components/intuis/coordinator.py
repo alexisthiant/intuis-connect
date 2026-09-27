@@ -37,6 +37,14 @@ class IntuisDataUpdateCoordinator(DataUpdateCoordinator[dict[str, Any]]):
         self.client = client
         self.home_id: str | None = None
         self.default_duration: int = DEFAULT_BOOST_DURATION_SECONDS
+        # Durée (en heures) choisie par l'utilisateur pour chaque pièce, via le
+        # curseur number.*_duree_consigne_manuelle. Alimente le thermostat
+        # standard (dial/carte) ; le service set_manual_temperature reste
+        # disponible pour une durée ponctuelle différente.
+        self.room_duration_hours: dict[str, float] = {}
+
+    def get_room_duration_hours(self, room_id: str) -> float:
+        return self.room_duration_hours.get(room_id, self.default_duration / 3600)
 
     async def _async_update_data(self) -> dict[str, Any]:
         try:

@@ -62,6 +62,7 @@
 | Type | Entité | Description |
 | --- | --- | --- |
 | **Climate** | `climate.<pièce>` | Thermostat complet (mesure, consigne, Auto/Manuel, preset Hors gel) |
+| **Number** | `number.<pièce>_duree_de_consigne_manuelle` | Durée (1-12h) appliquée automatiquement quand tu ajustes la température depuis le thermostat normal |
 | **Switch** | `switch.<pièce>_fenetre_ouverte` | État fenêtre ouverte, pilotable (lecture **et** écriture) |
 | **Sensor** ⚠️ | `sensor.<pièce>_consommation_electrique_du_jour` | Consommation du jour en kWh (endpoint non officiel) |
 
@@ -96,7 +97,7 @@
 
 ### `intuis.set_manual_temperature`
 
-Applique une consigne manuelle **avec une durée choisie de 1h à 12h**, au lieu de la durée par défaut de l'appli Intuis Connect. C'est la réponse directe au besoin « je veux définir la température ET sa durée » pour chaque radiateur.
+Applique une consigne manuelle **avec une durée choisie de 1h à 12h**, pour une intervention ponctuelle, sans changer le réglage habituel de la pièce.
 
 ```yaml
 service: intuis.set_manual_temperature
@@ -108,6 +109,10 @@ data:
 ```
 
 Passé le délai, le radiateur repasse automatiquement en mode programmé (Auto), exactement comme le fait l'appli mobile à l'expiration d'une dérogation manuelle.
+
+### Gérer la durée au quotidien : `number.<pièce>_duree_de_consigne_manuelle`
+
+Pour ne pas avoir à rappeler ce service à chaque fois, chaque pièce a aussi un curseur **Durée de consigne manuelle** (1-12h, visible sur le tableau de bord comme n'importe quel réglage). Une fois réglé, c'est cette durée qui est utilisée automatiquement à chaque changement de température depuis le thermostat normal (dial de la carte, ou service `climate.set_temperature`) — le service ci-dessus reste disponible pour une durée différente ponctuelle, sans toucher à ce réglage.
 
 ---
 
