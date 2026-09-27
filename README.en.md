@@ -1,3 +1,7 @@
+<p align="center">
+  <img src="brands/intuis/icon@2x.png" width="110" alt="Intuis Connect logo">
+</p>
+
 # Intuis Connect – Home Assistant Integration (unofficial)
 
 [🇫🇷 Français](README.md) | 🇬🇧 English
