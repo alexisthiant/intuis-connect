@@ -17,5 +17,19 @@
     "abort": {
       "already_configured": "Cette installation Intuis est déjà configurée."
     }
+  },
+  "entity": {
+    "climate": {
+      "room": {
+        "state_attributes": {
+          "preset_mode": {
+            "state": {
+              "home": "Programmation",
+              "hg": "Hors gel"
+            }
+          }
+        }
+      }
+    }
   }
 }

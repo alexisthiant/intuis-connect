@@ -2,20 +2,34 @@
   "config": {
     "step": {
       "user": {
-        "title": "Connexion à Intuis Connect",
-        "description": "Renseignez les identifiants de votre compte Intuis Connect (les mêmes que dans l'appli mobile Muller Intuitiv).",
+        "title": "Connect to Intuis Connect",
+        "description": "Enter your Intuis Connect account credentials (the same ones used in the Muller Intuitiv mobile app).",
         "data": {
-          "username": "Adresse e-mail",
-          "password": "Mot de passe"
+          "username": "Email address",
+          "password": "Password"
         }
       }
     },
     "error": {
-      "invalid_auth": "Identifiants invalides.",
-      "cannot_connect": "Impossible de contacter les serveurs Intuis Connect."
+      "invalid_auth": "Invalid credentials.",
+      "cannot_connect": "Could not reach the Intuis Connect servers."
     },
     "abort": {
-      "already_configured": "Cette installation Intuis est déjà configurée."
+      "already_configured": "This Intuis installation is already configured."
+    }
+  },
+  "entity": {
+    "climate": {
+      "room": {
+        "state_attributes": {
+          "preset_mode": {
+            "state": {
+              "home": "Schedule",
+              "hg": "Frost protection"
+            }
+          }
+        }
+      }
     }
   }
 }

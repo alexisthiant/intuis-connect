@@ -47,3 +47,9 @@ ENERGY_MEASURE_TYPES = [
     "sum_energy_elec",
 ]
 ENERGY_UPDATE_INTERVAL_SECONDS = 15 * 60
+
+# Durée personnalisable d'une consigne manuelle via le service
+# intuis.set_manual_temperature (en heures).
+MIN_MANUAL_DURATION_HOURS = 1
+MAX_MANUAL_DURATION_HOURS = 12
+SERVICE_SET_MANUAL_TEMPERATURE = "set_manual_temperature"

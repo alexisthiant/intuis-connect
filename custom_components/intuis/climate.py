@@ -5,6 +5,8 @@ import logging
 import time
 from typing import Any
 
+import voluptuous as vol
+
 from homeassistant.components.climate import (
     ClimateEntity,
     ClimateEntityFeature,
@@ -14,11 +16,21 @@ from homeassistant.components.climate import (
 from homeassistant.config_entries import ConfigEntry
 from homeassistant.const import ATTR_TEMPERATURE, UnitOfTemperature
 from homeassistant.core import HomeAssistant
+from homeassistant.helpers import entity_platform
 from homeassistant.helpers.entity import DeviceInfo
 from homeassistant.helpers.entity_platform import AddEntitiesCallback
 from homeassistant.helpers.update_coordinator import CoordinatorEntity
 
-from .const import DOMAIN, ROOM_MODE_FROST, ROOM_MODE_HOME, ROOM_MODE_MANUAL, ROOM_MODE_OFF
+from .const import (
+    DOMAIN,
+    MAX_MANUAL_DURATION_HOURS,
+    MIN_MANUAL_DURATION_HOURS,
+    ROOM_MODE_FROST,
+    ROOM_MODE_HOME,
+    ROOM_MODE_MANUAL,
+    ROOM_MODE_OFF,
+    SERVICE_SET_MANUAL_TEMPERATURE,
+)
 from .coordinator import IntuisDataUpdateCoordinator
 
 _LOGGER = logging.getLogger(__name__)
@@ -39,6 +51,19 @@ async def async_setup_entry(
         IntuisRoomClimate(coordinator, room_id) for room_id in coordinator.data["rooms"]
     )
 
+    platform = entity_platform.async_get_current_platform()
+    platform.async_register_entity_service(
+        SERVICE_SET_MANUAL_TEMPERATURE,
+        {
+            vol.Required(ATTR_TEMPERATURE): vol.Coerce(float),
+            vol.Required("duration_hours"): vol.All(
+                vol.Coerce(float),
+                vol.Range(min=MIN_MANUAL_DURATION_HOURS, max=MAX_MANUAL_DURATION_HOURS),
+            ),
+        },
+        "async_set_manual_temperature",
+    )
+
 
 class IntuisRoomClimate(CoordinatorEntity[IntuisDataUpdateCoordinator], ClimateEntity):
     """Thermostat pour une pièce / un radiateur Intuis.
@@ -50,6 +75,7 @@ class IntuisRoomClimate(CoordinatorEntity[IntuisDataUpdateCoordinator], ClimateE
 
     _attr_has_entity_name = True
     _attr_name = None
+    _attr_translation_key = "room"
     _attr_temperature_unit = UnitOfTemperature.CELSIUS
     _attr_target_temperature_step = 0.5
     _attr_min_temp = MIN_TEMP
@@ -121,7 +147,15 @@ class IntuisRoomClimate(CoordinatorEntity[IntuisDataUpdateCoordinator], ClimateE
         temperature = kwargs.get(ATTR_TEMPERATURE)
         if temperature is None:
             return
-        end_time = int(time.time()) + self.coordinator.default_duration
+        duration_hours = self.coordinator.default_duration / 3600
+        await self._async_apply_manual_setpoint(float(temperature), duration_hours)
+
+    async def async_set_manual_temperature(self, temperature: float, duration_hours: float) -> None:
+        """Consigne manuelle avec durée choisie (1 à 12h) — service intuis.set_manual_temperature."""
+        await self._async_apply_manual_setpoint(temperature, duration_hours)
+
+    async def _async_apply_manual_setpoint(self, temperature: float, duration_hours: float) -> None:
+        end_time = int(time.time()) + int(duration_hours * 3600)
         await self.coordinator.client.async_set_room_state(
             self.coordinator.home_id,
             self._room_id,

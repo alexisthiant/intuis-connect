@@ -1,10 +1,10 @@
 {
   "domain": "intuis",
   "name": "Intuis Connect (Muller Intuitiv)",
-  "codeowners": ["@TON-PSEUDO-GITHUB"],
+  "codeowners": ["@alexisthiant"],
   "config_flow": true,
-  "documentation": "https://github.com/TON-PSEUDO-GITHUB/ha-intuis-connect",
-  "issue_tracker": "https://github.com/TON-PSEUDO-GITHUB/ha-intuis-connect/issues",
+  "documentation": "https://github.com/alexisthiant/intuis-connect",
+  "issue_tracker": "https://github.com/alexisthiant/intuis-connect/issues",
   "integration_type": "hub",
   "iot_class": "cloud_polling",
   "requirements": [],
