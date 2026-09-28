@@ -32,10 +32,6 @@
 
 > Requires a recent Home Assistant (2024.1+); HACS optional but recommended.
 
-### One-Click Install
-
-[![Open your Home Assistant instance and add this repository to HACS.](https://my.home-assistant.io/badges/hacs_repository.svg)](https://my.home-assistant.io/redirect/hacs_repository/?owner=alexisthiant&repository=intuis-connect&category=integration)
-
 ### Via HACS (custom repository)
 
 1. HACS → the three dots **⋮** → **Custom repositories**
