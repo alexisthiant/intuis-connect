@@ -24,7 +24,10 @@
 
 ---
 
-## Installation
+### Installation en un clic (recommandée)
+[![Ouvre ton instance Home Assistant et ajoute ce dépôt dans HACS.](https://my.home-assistant.io/badges/hacs_repository.svg)](https://my.home-assistant.io/redirect/hacs_repository/?owner=alexisthiant&repository=intuis-connect&category=integration)
+
+## Installation manuelle
 
 > Nécessite Home Assistant récent (2024.1+) ; HACS optionnel mais recommandé.
 
