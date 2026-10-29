@@ -1,7 +1,3 @@
-<p align="center">
-  <img src="brands/intuis/icon@2x.png" width="110" alt="Intuis Connect logo">
-</p>
-
 # Intuis Connect – Home Assistant Integration (unofficial)
 
 [🇫🇷 Français](README.md) | 🇬🇧 English
@@ -28,7 +24,10 @@
 
 ---
 
-## Installation
+### One-Click Install (Recommended)
+[![Open your Home Assistant instance and open a repository inside the Home Assistant Community Store.](https://my.home-assistant.io/badges/hacs_repository.svg)](https://my.home-assistant.io/redirect/hacs_repository/?owner=alexisthiant&repository=intuis-connect&category=integration)
+
+## Manual Install
 
 > Requires a recent Home Assistant (2024.1+); HACS optional but recommended.
 
